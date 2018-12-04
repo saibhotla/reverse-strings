@@ -10,8 +10,6 @@ final class Library {
             return Collections.emptyList();
         }
 
-
-        //return Collections.singletonList("oof");
         return stringsToReverse
                 .stream()
                 .filter(Objects::nonNull)

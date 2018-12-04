@@ -1,6 +1,7 @@
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -61,6 +62,16 @@ final class LibraryTest {
 
         //Assert
         MatcherAssert.assertThat(actual.isEmpty(),is(true));
+
+    }
+
+    @Test
+    void reverseStringsReturnsTwoReversedWords(){
+        //Exercise
+        final List<String> actual = Library.reverseString(Arrays.asList("Dale", "Paul"));
+
+        //Assert
+        MatcherAssert.assertThat(actual,contains("elaD", "luaP"));
 
     }
 }
