@@ -1,14 +1,32 @@
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 final class Library {
+
+    public static void main(String[] args) {
+        System.out.println(sum(1,2,3,4));
+        System.out.println(multiply(4,6));
+
+    }
+
+    private static long multiply(final int startInclusive, final int endInclusive) {
+        return IntStream.rangeClosed(startInclusive,endInclusive)
+                .reduce((accumulator,currentNumber) -> accumulator*currentNumber)
+                .orElse(0);
+    }
+
+    private static long sum(final int... numbersToSum) {
+
+        return Arrays.stream(numbersToSum)
+                .reduce((left, right) -> left+right)
+                .orElse(0);
+    }
 
     public static List<String> reverseString(final List<String> stringsToReverse) {
         if(stringsToReverse == null){
@@ -51,7 +69,7 @@ final class Library {
         return valuesToBePlucked
                 .stream()
                 .filter(Objects::nonNull)
-                .map(keyValueMap -> keyValueMap.get("foo"))
+                .map(extractValueFromMap -> extractValueFromMap.get("foo"))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
