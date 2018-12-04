@@ -52,6 +52,7 @@ final class Library {
                 .stream()
                 .filter(Objects::nonNull)
                 .map(keyValueMap -> keyValueMap.get("foo"))
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
     }

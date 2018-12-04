@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -51,7 +52,7 @@ final class PluckTest {
     @Test
     void pluckValuesWhenGivenSingleElementListReturnList(){
         //Setup
-        HashMap<String, String> pluckMap= new HashMap<String, String>();
+        Map<String, String> pluckMap= new HashMap<String, String>();
         pluckMap.put("foo","bar");
 
         //Exercise
@@ -62,11 +63,24 @@ final class PluckTest {
     }
 
     @Test
+    void pluckValuesWhenGivenAnotherElementAndNullListReturnList(){
+        //Setup
+        Map<String, String> pluckMap= new HashMap<>();
+        pluckMap.put("foo","ski");
+
+        //Exercise
+        List<String> actual = Library.pluck(Arrays.asList(pluckMap,null));
+
+        assertThat(actual, contains("ski"));
+
+    }
+
+    @Test
     void pluckValuesWhenGivenAnotherElementListReturnList(){
         //Setup
-        HashMap<String, String> pluckMap1= new HashMap<>();
+        Map<String, String> pluckMap1= new HashMap<>();
         pluckMap1.put("foo","ski");
-        HashMap<String, String> pluckMap2= new HashMap<>();
+        Map<String, String> pluckMap2= new HashMap<>();
         pluckMap2.put("foo","bar");
 
         //Exercise
@@ -76,6 +90,19 @@ final class PluckTest {
 
     }
 
+    @Test
+    void pluckValuesWhenGivenElementWithNullValueReturnList(){
+        //Setup
+        Map<String, String> pluckMap1= new HashMap<>();
+        pluckMap1.put("foo","ski");
+        Map<String, String> pluckMap2= new HashMap<>();
+        pluckMap2.put("foo",null);
+
+        //Exercise
+        List<String> actual = Library.pluck(Arrays.asList(pluckMap1,pluckMap2));
+
+        assertThat(actual, contains("ski"));
+    }
 
 
 
