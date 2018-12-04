@@ -11,8 +11,7 @@ import java.util.stream.IntStream;
 final class Library {
 
     public static void main(String[] args) {
-        System.out.println(sum(1, 2, 3, 4));
-        System.out.println(multiply(10, 20));
+
 
     }
 
@@ -77,15 +76,19 @@ final class Library {
     }
 
     public static String join(String delimiter, final String... stringsToBeJoined) {
-        return Arrays.stream(
-                Optional
-                        .ofNullable(stringsToBeJoined)
-                        .orElse(new String[0]))
 
-                .reduce((accumulator, currentValue)
-                        -> accumulator +
-                        Optional.ofNullable(delimiter).orElse(" ")
-                        +  currentValue)
+        final String theDelimiter = Optional
+                .ofNullable(delimiter)
+                .orElse(" ");
+
+        final String[] theStrings = Optional
+                .ofNullable(stringsToBeJoined)
+                .orElse(new String[0]);
+
+        return Arrays.stream(theStrings)
+                .filter(Objects::nonNull)
+                .map(input -> " ".equals(input) ? "`" : input)
+                .reduce((accumulator, currentValue) -> accumulator + theDelimiter +  currentValue)
                 .orElse("");
 
 

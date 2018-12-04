@@ -73,4 +73,25 @@ final class JoinTest {
 
     }
 
+    @Test
+    void returnsEmptyStringWithNoSpacesForNullInStrings() {
+        //Exercise
+        String actual = Library.join(null, "Bottle", null);
+
+        assertThat(actual, is("Bottle"));
+
+    }
+
+
+    @Test
+    void joinReplacesSpacesWithBackTick() {
+        //Exercise
+        String actual = Library.join(null, "Bottle", " ", "Fred");
+
+        assertThat(actual, is("Bottle ` Fred"));
+
+    }
+
+
+
 }
