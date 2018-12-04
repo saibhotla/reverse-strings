@@ -52,4 +52,15 @@ final class LibraryTest {
         //Assert
         MatcherAssert.assertThat(actual,contains("rab"));
     }
+
+    @Test
+    void reverseStringsRemovesNullFromList(){
+
+        //Exercise
+        final List<String> actual = Library.reverseString(Collections.singletonList( null));
+
+        //Assert
+        MatcherAssert.assertThat(actual.isEmpty(),is(true));
+
+    }
 }
