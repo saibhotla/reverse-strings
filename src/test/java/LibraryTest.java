@@ -41,4 +41,15 @@ final class LibraryTest {
         //Assert
         MatcherAssert.assertThat(actual,contains("oof"));
     }
+
+    @Test
+    void reverseStringsReturnsListWithOneDifferentReversedValue(){
+        //Setup
+
+        //Exercise
+        final List<String> actual = Library.reverseString(Collections.singletonList("bar"));
+
+        //Assert
+        MatcherAssert.assertThat(actual,contains("rab"));
+    }
 }
